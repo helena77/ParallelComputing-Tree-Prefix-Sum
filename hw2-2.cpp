@@ -119,16 +119,6 @@ private:
 		// compute the prefix sum of the left leaves 
 		if (isLeaf(i)) 
 			prefix->at(i - (n - 1)) = top + value(i);
-        // compute the prefix sum of the right leaves		
-		//else if(isLeaf(i) && right(parent(i)) == i) 
-			//prefix->at(i - (n - 1)) = top + value(i - 1) + value(i);
-		// compute the prefix sum of the last second line of nodes
-		// this line need to be computed separately for the top values of  
-		// their right children are the same as their left children 
-		//else if (isLeaf(left(i)) && left(i) < size() && right(i) < size()) {
-			//calcPrefix(left(i), top, level + 1, prefix);
-			//calcPrefix(right(i), top, level + 1, prefix);
-		//}
 		// compute the prefix sum of interior nodes
 		else if(!isLeaf(i) && level <= N_THREADS/2) {
 			auto handle = async(launch::async, &SumHeap::calcPrefix, this, left(i), top, level + 1, prefix);
